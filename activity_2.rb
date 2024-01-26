@@ -84,7 +84,36 @@ class Python < RunCode
     end
 end
 
-C_code
+puts "C Language\n"
+CCode = C.new
+CCode.run
+
+puts "Python Language\n"
+PythonCode = Python.new
+PythonCode.run
+
 #PolymorphismbyDuckTyping
+class C
+    def run
+        puts "Running code in C\n"
+    end
+end
 
+class Python
+    def run
+        puts "Running code in Python\n"
+    end
+end
 
+class RunCode
+    def run(language)
+        language.run
+    end
+end
+
+run_code = RunCode.new
+CCode2 = C.new
+run_code.run(CCode2)
+
+PythonCode2 = Python.new
+run_code.run(PythonCode2)
