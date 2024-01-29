@@ -19,3 +19,12 @@ SET first_name = 'Ivan', middle_name = 'Ingram', last_name = 'Howard', age = 25,
 where id = 1;
 
 DELETE FROM students where id = 6;
+
+SELECT COUNT(id) FROM students;
+
+SELECT * FROM students
+WHERE location = 'Manila';
+
+SELECT AVG(age) FROM students;
+
+SELECT * FROM students ORDER BY age DESC;
