@@ -28,3 +28,43 @@ WHERE location = 'Manila';
 SELECT AVG(age) FROM students;
 
 SELECT * FROM students ORDER BY age DESC;
+
+CREATE TYPE valid_grades AS ENUM ('A', 'B', 'C', 'D', 'E', 'F');
+
+CREATE TABLE research_papers (
+    id integer PRIMARY KEY NOT NULL,
+    student_id integer NOT NULL,
+    grade valid_grades NULL,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+INSERT INTO research_papers (id, student_id, grade)
+VALUES (1, 5, 'A'),
+(2, 2, 'A'),
+(3, 3, 'B'),
+(4, 4, 'C'),
+(5, 5, 'B'),
+(6, 1, NULL),
+(7, 2, 'C'),
+(8, 4, 'B'),
+(9, 3, NULL),
+(10, 1, 'C');
+
+
+-- Query all students with multiple research papers
+
+SELECT students.first_name, students.last_name, COUNT(research_papers.grade) AS number_of_research_papers
+FROM students
+INNER JOIN research_papers
+ON students.id = research_papers.student_id
+GROUP BY students.first_name, students.last_name
+HAVING COUNT(research_papers.grade)>1;
+
+-- Query all students with ungraded research papers
+
+SELECT students.first_name, students.last_name, research_papers.id AS research_paper_id, research_papers.grade
+FROM students
+INNER JOIN research_papers
+ON students.id = research_papers.student_id
+WHERE research_papers.grade IS NULL
+GROUP BY students.first_name, students.last_name, research_papers.id;
