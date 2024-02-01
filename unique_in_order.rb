@@ -5,7 +5,7 @@ def unique_in_order (input)
         if order[order.length-1] == item
             next
         else 
-            order.push(item)
+            order << item
         end
     end
     puts "Unique in Order: #{order}"
@@ -18,7 +18,7 @@ def unique_in_order (input)
         if order[order.length-1] == item
             next
         else 
-            order.push(item)
+            order << item
         end
     end
     puts "Unique in Order: #{order}"
